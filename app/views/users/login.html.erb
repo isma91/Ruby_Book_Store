@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <h1 class="title">Welcome to MyBookStore !!</h1>
+    <h1 class="title">Login to manage your bookstore !!</h1>
+  </div>
+  <div class="row">
+    <%= form_tag "/login", method: "post" do %>
+        <div class="row">
+          <div class="input-field">
+            <input type="email" name="email" id="email">
+            <label for="email">Email</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <input type="password" name="pass" id="pass">
+            <label for="pass">Password</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="endButton">
+            <button class="waves-effect btn-flat">Login</button>
+          </div>
+        </div>
+    <% end %>
+    <div class="row">
+      <h1 class="title">Want to create an account ?</h1>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/signup">Sign up</a>
+      </div>
+    </div>
+  </div>
+</div>
