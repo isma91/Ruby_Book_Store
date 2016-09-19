@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+before_action :checkUserConnected
 
   def create
     errorEmpty = false
@@ -18,20 +19,25 @@ class UsersController < ApplicationController
       redirect_to "/signup"
     end
     if errorEmpty == false
-      duplicateEmail = User.find_by_email(user["email"])
-      if duplicateEmail != nil
-        flash[:fail] = "Email already taken !!"
-        redirect_to "/signup"
-      end
-      if duplicateEmail == nil
-        cryptedPass = BCrypt::Password.create(user["pass"]);
-        userClass = User.new(lastname: user["lastname"], firstname: user["firstname"], pass: cryptedPass, email: user["email"])
-        if userClass.save
-          flash[:success] = "You successfully registered !! You can now login !!"
-          redirect_to "/login"
-        else
-          flash[:fail] = "Error while we try to register your account !! Try again !!"
+      if user["pass"].to_s.length < 5
+        flash[:fail] = "Your password must have at least 5 characters !!"
+        redirect_to '/signup'
+      else
+        duplicateEmail = User.find_by_email(user["email"])
+        if duplicateEmail != nil
+          flash[:fail] = "Email already taken !!"
           redirect_to "/signup"
+        end
+        if duplicateEmail == nil
+          cryptedPass = BCrypt::Password.create(user["pass"]);
+          userClass = User.new(lastname: user["lastname"], firstname: user["firstname"], pass: cryptedPass, email: user["email"])
+          if userClass.save
+            flash[:success] = "You successfully registered !! You can now login !!"
+            redirect_to "/login"
+          else
+            flash[:fail] = "Error while we try to register your account !! Try again !!"
+            redirect_to "/signup"
+          end
         end
       end
     end
@@ -53,26 +59,26 @@ class UsersController < ApplicationController
       flash[:fail] = "Email or password are empty  !!"
       redirect_to "/login"
     end
-    userClass = User.new
-    userToCheck = userClass.findByEmail(user["email"])
-    if userToCheck == false
+    userToCheck = User.find_by_email(user["email"])
+    if userToCheck == nil
       flash[:fail] = "Bad email or password !!"
       redirect_to "/login"
     else
       passToCheck = BCrypt::Password.new userToCheck["pass"]
       if passToCheck == user["pass"]
-        session[:userId] = user["id"]
+        session[:userId] = userToCheck["id"]
+        redirect_to "/books"
       else
         flash[:fail] = "Bad email or password !!"
+        redirect_to "/login"
       end
-      redirect_to "/login"
     end
   end
 
   def checkUserConnected
-    if session[:userId] == nil
-      flash[:fail] = "You must be logged !!"
-      redirect_to "/login"
+    if session[:userId] != nil
+      flash[:fail] = "You can't signup or login when you're already logged !!"
+      redirect_to "/books"
     end
   end
 
