@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root 'users#login'
 
   get 'login' => 'users#login'
+  get 'user/login' => 'users#login'
   get 'signup' => 'users#new'
+  get 'user/create' => 'users#new'
 
   post "user/login" => "users#connexion"
   post 'user/create' => 'users#create'
