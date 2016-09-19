@@ -1,7 +1,4 @@
 class UsersController < ApplicationController
-  #def new
-  #  @user = User.new
-  #end
 
   def create
     errorEmpty = false
@@ -20,20 +17,22 @@ class UsersController < ApplicationController
       flash[:fail] = "Some fields of the form has not been filled !!"
       redirect_to "/signup"
     end
-    duplicateEmail = User.find_by_email(user["email"])
-    if duplicateEmail != nil
-      flash[:fail] = "Email already taken !!"
-      redirect_to "/signup"
-    end
-    if duplicateEmail == nil
-      cryptedPass = BCrypt::Password.create(user["pass"]);
-      userClass = User.new(lastname: user["lastname"], firstname: user["firstname"], pass: cryptedPass, email: user["email"], token: nil)
-      if userClass.save
-        flash[:success] = "You successfully registered !! You can now login !!"
-        redirect_to "/login"
-      else
-        flash[:fail] = "Error while we try to register your account !! Try again !!"
+    if errorEmpty == false
+      duplicateEmail = User.find_by_email(user["email"])
+      if duplicateEmail != nil
+        flash[:fail] = "Email already taken !!"
         redirect_to "/signup"
+      end
+      if duplicateEmail == nil
+        cryptedPass = BCrypt::Password.create(user["pass"]);
+        userClass = User.new(lastname: user["lastname"], firstname: user["firstname"], pass: cryptedPass, email: user["email"])
+        if userClass.save
+          flash[:success] = "You successfully registered !! You can now login !!"
+          redirect_to "/login"
+        else
+          flash[:fail] = "Error while we try to register your account !! Try again !!"
+          redirect_to "/signup"
+        end
       end
     end
   end
@@ -62,7 +61,6 @@ class UsersController < ApplicationController
     else
       passToCheck = BCrypt::Password.new userToCheck["pass"]
       if passToCheck == user["pass"]
-        session[:userToken] = userClass.generateToken
         session[:userId] = user["id"]
       else
         flash[:fail] = "Bad email or password !!"
@@ -70,5 +68,6 @@ class UsersController < ApplicationController
       redirect_to "/login"
     end
   end
+
 
 end
