@@ -69,5 +69,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def checkUserConnected
+    if session[:userId] == nil
+      flash[:fail] = "You must be logged !!"
+      redirect_to "/login"
+    end
+  end
+
+  def logout
+    session[:userId] = nil
+    flash[:success] = "You logout successfully !!"
+    redirect_to "/login"
+  end
 
 end
