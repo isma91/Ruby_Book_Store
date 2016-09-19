@@ -3,6 +3,11 @@
     <h1 class="title">Welcome to MyBookStore !!</h1>
     <h1 class="title">Login to manage your bookstore !!</h1>
   </div>
+  <div class="row" id="event">
+    <% flash.each do |typeAlert, message| %>
+        <div class="alert alert-<%= typeAlert %>"><%= message %></div>
+    <% end %>
+  </div>
   <div class="row">
     <%= form_tag "/login", method: "post" do %>
         <div class="row">
