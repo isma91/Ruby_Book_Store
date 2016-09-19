@@ -39,4 +39,35 @@ class UsersController < ApplicationController
     end
   end
 
+
+  def connexion
+    errorEmpty = false
+    user = Hash.new
+    user["email"] = params[:email]
+    user["pass"] = params[:pass]
+    user.each do |name, value|
+      if value.to_s == ""
+        errorEmpty = true
+        break
+      end
+    end
+    if errorEmpty == true
+      flash[:fail] = "Email or password are empty  !!"
+      redirect_to "/login"
+    end
+    userClass = User.new
+    userToCheck = userClass.findByEmail(user["email"])
+    if userToCheck == false
+      flash[:fail] = "Bad email or password !!"
+      redirect_to "/login"
+    else
+      passToCheck = BCrypt::Password.new userToCheck["pass"]
+      if passToCheck == user["pass"]
+      else
+        flash[:fail] = "Bad email or password !!"
+      end
+      redirect_to "/login"
+    end
+  end
+
 end
