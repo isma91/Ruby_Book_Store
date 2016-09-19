@@ -1,15 +1,14 @@
 class UsersController < ApplicationController
-  def new
-    @user = User.new
-  end
+  #def new
+  #  @user = User.new
+  #end
 
   def create
-    Rails.logger.debug params.inspect
     errorEmpty = false
+    duplicateEmail = false
     user = Hash.new
     user["lastname"] = params[:lastname]
     user["firstname"] = params[:firstname]
-    user["username"] = params[:username]
     user["pass"] = params[:pass]
     user["email"] = params[:email]
     user.each do |name, value|
@@ -19,18 +18,31 @@ class UsersController < ApplicationController
       end
     end
     if errorEmpty == true
-      flash[:failed] = "Some fields of the form has not been filled !!"
+      flash[:fail] = "Some fields of the form has not been filled !!"
+      redirect_to "/signup"
     end
-    redirect_to "/signup"
-    #@user = User.new(params[:user])
-    #if @user.save
-    #  flash[:notice] = "You Sign up successfully !!"
-    #  flash[:color] = "valid"
-    #else
-    #  flash[:notice] = "Form is invalid !!"
-    #  flash[:color] = "invalid"
-    #end
-    #render new
-    #render params[:]
+    users = User.all
+    users.each do |userToCheck|
+      if userToCheck.email == user["email"]
+        duplicateEmail = true
+        break
+      end
+    end
+    if duplicateEmail == true
+      flash[:fail] = "Email already taken !!"
+      redirect_to "/signup"
+    end
+    if duplicateEmail == false
+      salt = BCrypt::Engine.generate_salt
+      cryptedPass = BCrypt::Engine.hash_secret(user["pass"], salt)
+      userClass = User.new(lastname: user["lastname"], firstname: user["firstname"], pass: cryptedPass, email: user["email"])
+      if userClass.save
+        flash[:success] = "You successfully registered !! You can now login !!"
+        redirect_to "/login"
+      else
+        flash[:fail] = "Error while we try to register your account !! Try again !!"
+        redirect_to "/signup"
+      end
+    end
   end
 end
