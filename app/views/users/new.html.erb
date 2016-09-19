@@ -3,8 +3,8 @@
     <h1 class="title">Sign up to manage your bookstore !!</h1>
   </div>
   <div class="row" id="event">
-    <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% flash.each do |typeAlert, message| %>
+        <div class="alert alert-<%= typeAlert %>"><%= message %></div>
     <% end %>
   </div>
   <div class="row">
