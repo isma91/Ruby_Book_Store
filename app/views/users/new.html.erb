@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <h1 class="title">Sign up to manage your bookstore !!</h1>
+  </div>
+  <div class="row" id="event">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+  </div>
+  <div class="row">
+    <%= form_tag "/user/create", method: "post" do %>
+        <div class="row">
+          <div class="input-field">
+            <input type="text" name="lastname" id="lastname">
+            <label for="lastname">Lastname</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <input type="text" name="firstname" id="firstname">
+            <label for="firstname">Firstname</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <input type="text" name="username" id="username">
+            <label for="username">Username</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <input type="password" name="pass" id="pass">
+            <label for="pass">Password</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <input type="email" name="email" id="email">
+            <label for="email">Email</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="endButton">
+            <button class="waves-effect btn-flat">Sign up</button>
+          </div>
+        </div>
+    <% end %>
+    <div class="row">
+      <h1 class="title">Have an account ?</h1>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/login">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
