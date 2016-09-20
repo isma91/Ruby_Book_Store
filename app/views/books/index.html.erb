@@ -9,6 +9,7 @@
   </div>
   <div class="row">
     <%= form_tag "/logout", method: "post" do %>
+        <%= csrf_meta_tags %>
           <div class="endButton">
             <button class="waves-effect btn-flat">Logout</button>
         </div>
