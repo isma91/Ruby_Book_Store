@@ -38,9 +38,9 @@ ActiveRecord::Schema.define(version: 20160920075351) do
     t.string   "date"
     t.string   "userId"
     t.string   "action"
-    t.integer  "bookId"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "bookCustomerId"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "orders", force: :cascade do |t|
