@@ -32,7 +32,7 @@
     </div>
   </div>
   <div class="row">
-    <%= form_tag "/book/create", method: "post" do %>
+    <%= form_tag({action: :create}, multipart: true) do %>
         <div class="row">
           <div class="input-field">
             <input type="text" name="name" id="name">
