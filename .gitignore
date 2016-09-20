@@ -22,3 +22,6 @@
 .idea
 #lock files
 Gemfile.lock
+#ignore all img unless the empty file
+public/images/*
+!public/images/empty
