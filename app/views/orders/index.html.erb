@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <h1 class="title">Welcome back <%= @userLastname %>  <%= @userFirstname %>!!</h1>
+    <h1 class="title">Here is all your orders list !!</h1>
+  </div>
+  <div class="row" id="event">
+    <% flash.each do |typeAlert, message| %>
+        <div class="alert alert-<%= typeAlert %>"><%= message %></div>
+    <% end %>
+  </div>
+  <div class="row" id="allButton">
+    <div class="row">
+      <%= form_tag "/logout", method: "post" do %>
+          <%= csrf_meta_tags %>
+          <div class="endButton">
+            <button class="waves-effect btn-flat">Logout</button>
+          </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/customers">All Customers</a>
+        <a class="waves-effect btn-flat" href="/books">All Books</a>
+        <a class="waves-effect btn-flat" href="/logs">All Logs</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/book/new">Add Book</a>
+        <a class="waves-effect btn-flat" href="/order/new">Add Order</a>
+        <a class="waves-effect btn-flat" href="/customer/new">Add Customer</a>
+      </div>
+    </div>
+  </div>
+  <% if @orders.length == 0 %>
+      <p class="title">No order stored yet !!</p>
+  <% else %>
+      <p class="title">Some order here !!</p>
+  <% end %>
+</div>
