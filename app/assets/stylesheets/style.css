@@ -72,7 +72,7 @@ a:focus {
 	color: #FFFFFF;
 	text-decoration: none;
 }
-#div_error {
+#resumeError {
 	text-align: center;
 	color: #FF0000;
 	font-weight: bold;
