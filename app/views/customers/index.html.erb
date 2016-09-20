@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <h1 class="title">Welcome back <%= @userLastname %>  <%= @userFirstname %>!!</h1>
+  </div>
+  <div class="row" id="event">
+    <% flash.each do |typeAlert, message| %>
+        <div class="alert alert-<%= typeAlert %>"><%= message %></div>
+    <% end %>
+  </div>
+  <div class="row" id="allButton">
+    <div class="row">
+      <%= form_tag "/logout", method: "post" do %>
+          <%= csrf_meta_tags %>
+          <div class="endButton">
+            <button class="waves-effect btn-flat">Logout</button>
+          </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/orders">All Orders</a>
+        <a class="waves-effect btn-flat" href="/customers">All Customers</a>
+        <a class="waves-effect btn-flat" href="/logs">All Logs</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/book/new">Add Book</a>
+        <a class="waves-effect btn-flat" href="/order/new">Add Order</a>
+        <a class="waves-effect btn-flat" href="/customer/new">Add Customer</a>
+      </div>
+    </div>
+  </div>
+  <% if @customers.length == 0 %>
+      <p class="title">No customer stored yet !!</p>
+  <% else %>
+      <div class="row">
+        <table>
+          <thead>
+          <tr>
+            <th data-field="lastname">Lastname</th>
+            <th data-field="firstname">Firstname</th>
+            <th data-field="adresse">Adresse</th>
+            <th data-field="city">City</th>
+            <th data-field="email">Email</th>
+          </tr>
+          </thead>
+          <tbody>
+          <%= @customers.each do |customer| %>
+              <tr>
+                <td><%= customer.lastname %></td>
+                <td><%= customer.firstname %></td>
+                <td><%= customer.adresse %></td>
+                <td><%= customer.city %></td>
+                <td><%= customer.email %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+  <% end %>
+</div>
