@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="row">
+    <h1 class="title">You can add here a new book !!</h1>
+  </div>
+  <div class="row" id="event">
+    <% flash.each do |typeAlert, message| %>
+        <div class="alert alert-<%= typeAlert %>"><%= message %></div>
+    <% end %>
+  </div>
+  <div class="row" id="allButton">
+    <div class="row">
+      <%= form_tag "/logout", method: "post" do %>
+          <%= csrf_meta_tags %>
+          <div class="endButton">
+            <button class="waves-effect btn-flat">Logout</button>
+          </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/books">All Books</a>
+        <a class="waves-effect btn-flat" href="/orders">All Orders</a>
+        <a class="waves-effect btn-flat" href="/customers">All Customers</a>
+        <a class="waves-effect btn-flat" href="/logs">All Logs</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/order/new">Add Order</a>
+        <a class="waves-effect btn-flat" href="/customer/new">Add Customer</a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <%= form_tag "/book/create", method: "post" do %>
+        <div class="row">
+          <div class="input-field">
+            <input type="text" name="name" id="name">
+            <label for="name">Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <input type="text" name="author" id="author">
+            <label for="author">Author</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <input type="text" name="editor" id="editor">
+            <label for="editor">Editor</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <select name="type">
+              <option value="apologue">Apologue</option>
+              <option value="comic">Comic</option>
+              <option value="epistolary">Epistolary</option>
+              <option value="manga">Manga</option>
+              <option value="novel" selected="true">Novel</option>
+              <option value="poem">Poem</option>
+              <option value="theater">Theater</option>
+            </select>
+            <label>Type Of Book</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <select multiple="true" name="kind[]" id="selectKind">
+              <option value="action">Action</option>
+              <option value="adventure">Adventure</option>
+              <option value="detective">Detective</option>
+              <option value="drama">Drama</option>
+              <option value="erotic">Erotic</option>
+              <option value="fantasy">Fantasy</option>
+              <option value="horror">Horror</option>
+              <option value="humour">Humour</option>
+              <option value="legend">Legend</option>
+              <option value="mystery">Mystery</option>
+              <option value="mythology">Mythology</option>
+              <option value="romance">Romance</option>
+              <option value="science fiction">Science fiction</option>
+              <option value="suspence">Suspence</option>
+              <option value="thriller">Thriller</option>
+              <option value="western">Western</option>
+            </select>
+            <label for="kind" id="labelKind">Kind Of Novel</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>file</span>
+              <input type="file" accept="image/*" name="cover">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path" type="text" id="filePath">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <label for="date">Year of publication</label>
+          <input type="date" name="date" id="date" class="datepicker">
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <p id="resumeError"></p>
+            <textarea id="resume" name="resume" class="materialize-textarea"></textarea>
+            <label for="resume" id="labelResume">Resume of </label>
+            <span id="resumeCount">0</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="endButton">
+            <button class="waves-effect btn-flat">Add the book</button>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
