@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row">
+    <h1 class="title">You can add here a new order !!</h1>
+  </div>
+  <div class="row" id="event">
+    <% flash.each do |typeAlert, message| %>
+        <div class="alert alert-<%= typeAlert %>"><%= message %></div>
+    <% end %>
+  </div>
+  <div class="row" id="allButton">
+    <div class="row">
+      <%= form_tag "/logout", method: "post" do %>
+          <%= csrf_meta_tags %>
+          <div class="endButton">
+            <button class="waves-effect btn-flat">Logout</button>
+          </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/books">All Books</a>
+        <a class="waves-effect btn-flat" href="/orders">All Orders</a>
+        <a class="waves-effect btn-flat" href="/customers">All Customers</a>
+        <a class="waves-effect btn-flat" href="/logs">All Logs</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/order/new">Add Customer</a>
+        <a class="waves-effect btn-flat" href="/book/new">Add Book</a>
+      </div>
+    </div>
+  </div>
+  <% if @books.length == 0 || @customers.length == 0 %>
+      <p class="title">You don't have book or customer !! You can't add an order !!</p>
+  <% else %>
+      <div class="row">
+        <%= form_tag({action: :create}) do %>
+            <div class="row">
+              <div class="input-field">
+                <select id="kind" name="kind">
+                  <option value="rent">Rent</option>
+                  <option value="purchase">Purchase</option>
+                </select>
+                <label for="kind">Kind</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field">
+                <select id="book" name="book">
+                  <% @books.each do |book| %>
+                  <option value="<%= book.id %>" data-icon="/images/<%= book.cover %>"><%= book.name %></option>
+                  <% end %>
+                </select>
+                <label for="book">Book</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field">
+                <select id="customer" name="customer">
+                  <% @customers.each do |customer| %>
+                      <option value="<%= customer.id %>"><%= customer.lastname %> <%= customer.firstname %></option>
+                  <% end %>
+                </select>
+                <label for="customer">Customer</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="endButton">
+                <button class="waves-effect btn-flat">Add the Order</button>
+              </div>
+            </div>
+        <% end %>
+      </div>
+  <% end %>
+</div>
