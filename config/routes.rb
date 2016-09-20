@@ -11,11 +11,15 @@ Rails.application.routes.draw do
   get 'customers'        => 'customers#index'
   get 'customer/create'  => 'customers#new'
   get 'logs'             => 'logs#index'
+  get 'orders'           => 'orders#index'
+  get 'order/new'        => 'orders#new'
+  get 'order/create'     => 'orders#new'
 
   post "user/login"      => "users#connexion"
   post 'user/create'     => 'users#create'
   post 'logout'          => 'sessions#logout'
   post 'book/create'     => 'books#create'
   post 'customer/create' => 'customers#create'
+  post 'order/create'    => 'orders#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
