@@ -8,34 +8,41 @@
     <% end %>
   </div>
   <div class="row">
-    <%= form_tag "/user/create", method: "post" do %>
+    <% if @user.errors.any? %>
+        <% for message_error in @user.errors.full_messages %>
+            <div class="alert-fail"><%= message_error %></div>
+        <% end %>
+    <% end %>
+  </div>
+  <div class="row">
+    <%= form_for(:user, :url => {:controller => 'users', :action => 'create'}) do |f| %>
         <div class="row">
           <div class="input-field">
-            <input type="text" name="lastname" id="lastname">
+            <%= f.text_field :lastname, :id => 'lastname' %>
             <label for="lastname">Lastname</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field">
-            <input type="text" name="firstname" id="firstname">
+            <%= f.text_field :firstname, :id => 'firstname' %>
             <label for="firstname">Firstname</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field">
-            <input type="password" name="pass" id="pass">
+            <%= f.password_field :pass, :id => 'pass' %>
             <label for="pass">Password</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field">
-            <input type="email" name="email" id="email">
+            <%= f.email_field :email, :id => 'email' %>
             <label for="email">Email</label>
           </div>
         </div>
         <div class="row">
           <div class="endButton">
-            <button class="waves-effect btn-flat">Sign up</button>
+            <%= f.submit "Sign up", :class => 'waves-effect btn-flat' %>
           </div>
         </div>
     <% end %>
