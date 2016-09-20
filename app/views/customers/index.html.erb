@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
     <h1 class="title">Welcome back <%= @userLastname %>  <%= @userFirstname %>!!</h1>
+    <h1 class="title">Here is all your customers list !!</h1>
   </div>
   <div class="row" id="event">
     <% flash.each do |typeAlert, message| %>
@@ -19,7 +20,7 @@
     <div class="row">
       <div class="endButton">
         <a class="waves-effect btn-flat" href="/orders">All Orders</a>
-        <a class="waves-effect btn-flat" href="/customers">All Customers</a>
+        <a class="waves-effect btn-flat" href="/books">All Books</a>
         <a class="waves-effect btn-flat" href="/logs">All Logs</a>
       </div>
     </div>
