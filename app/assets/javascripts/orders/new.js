@@ -1,3 +1,8 @@
-/**
- * Created by isma91 on 20/09/16.
- */
+/*jslint browser: true, node : true*/
+/*jslint devel : true*/
+/*global $, document, this*/
+//$(document).ready(function() {
+$(document).on('turbolinks:load', function () {
+    /* initialize the materialize select */
+    $('select').material_select();
+});
