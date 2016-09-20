@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
-before_action :checkUserConnected
+before_action :requireLogin
 
-  def checkUserConnected
+  def requireLogin
     if session[:userId] == nil
       flash[:fail] = "You must be logged !!"
       redirect_to "/login"
