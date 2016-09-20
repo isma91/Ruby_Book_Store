@@ -69,7 +69,7 @@ before_action :mustNotBeConnected
         time = Time.new
         currentTime = time.strftime("%d-%m-%Y %H:%M:%S")
         session[:userId] = userToCheck["id"]
-        Log.new(date: currentTime, userId: userToCheck["id"], action: "login", bookId: nil)
+        Log.new(date: currentTime, userId: userToCheck["id"], action: "login", bookId: nil).save
         redirect_to "/books"
       else
         flash[:fail] = "Bad email or password !!"
