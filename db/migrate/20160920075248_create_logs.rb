@@ -4,7 +4,7 @@ class CreateLogs < ActiveRecord::Migration[5.0]
       t.string :date
       t.string :userId
       t.string :action
-      t.integer :bookId
+      t.integer :bookCustomerId
       t.timestamps
     end
   end
