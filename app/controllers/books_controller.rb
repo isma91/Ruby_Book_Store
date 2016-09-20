@@ -56,7 +56,7 @@ before_action :requireLogin
       bookClass.save
       time = Time.new
       currentTime = time.strftime("%d-%m-%Y %H:%M:%S")
-      Log.new(date: currentTime, userId: session[:userId], action: "add book", bookId: bookClass.id).save
+      Log.new(date: currentTime, userId: session[:userId], action: "add book", bookCustomerId: bookClass.id).save
       flash[:success] = "Book added successfully !!"
       redirect_to "/books"
     end
