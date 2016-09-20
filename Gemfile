@@ -49,3 +49,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #bcrypt
 gem 'bcrypt'
+#for jquery good document load
+gem 'jquery-turbolinks'
