@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-before_action :checkUserConnected
+before_action :mustNotBeConnected
 
   def create
     errorEmpty = false
@@ -66,7 +66,10 @@ before_action :checkUserConnected
     else
       passToCheck = BCrypt::Password.new userToCheck["pass"]
       if passToCheck == user["pass"]
+        time = Time.new
+        currentTime = time.strftime("%d-%m-%Y %H:%M:%S")
         session[:userId] = userToCheck["id"]
+        Log.new(date: currentTime, userId: userToCheck["id"], action: "login", bookId: nil)
         redirect_to "/books"
       else
         flash[:fail] = "Bad email or password !!"
@@ -75,17 +78,11 @@ before_action :checkUserConnected
     end
   end
 
-  def checkUserConnected
+  def mustNotBeConnected
     if session[:userId] != nil
       flash[:fail] = "You can't signup or login when you're already logged !!"
       redirect_to "/books"
     end
-  end
-
-  def logout
-    session[:userId] = nil
-    flash[:success] = "You logout successfully !!"
-    redirect_to "/login"
   end
 
 end
