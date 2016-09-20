@@ -37,24 +37,22 @@
   <% else %>
       <div class="row">
         <%= @books.each do |book| %>
-            <div class="row">
-              <div class="card col s4">
-                <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src="/images/<%= book.cover %>">
-                </div>
-                <div class="card-content">
-                  <p class="card-title activator grey-text text-darken-4"><%= book.name %></p>
-                  <p class="card-title activator grey-text text-darken-4">By <%= book.author %></p>
-                  <p class="card-title activator grey-text text-darken-4">In <%= book.year %></p>
-                  <p class="card-title activator grey-text text-darken-4">List of Kind :</p>
-                  <%= book.kind.split("|").each do |kind| %>
-                      <li class="card-title activator grey-text text-darken-4"><%= kind %></li>
-                  <% end %>
-                </div>
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">X</span>
-                  <p><%= book.resume %></p>
-                </div>
+            <div class="card col s4">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src="/images/<%= book.cover %>">
+              </div>
+              <div class="card-content">
+                <p class="card-title activator grey-text text-darken-4"><%= book.name %></p>
+                <p class="card-title activator grey-text text-darken-4">By <%= book.author %></p>
+                <p class="card-title activator grey-text text-darken-4">In <%= book.year %></p>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">X</span>
+                <p><%= book.resume %></p>
+                <p>List of Kind :</p>
+                <%= book.kind.split("|").each do |kind| %>
+                    <li><%= kind %></li>
+                <% end %>
               </div>
             </div>
         <% end %>
