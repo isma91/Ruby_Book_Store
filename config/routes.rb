@@ -7,6 +7,6 @@ Rails.application.routes.draw do
 
   post "user/login" => "users#connexion"
   post 'user/create' => 'users#create'
-  post 'logout' => 'users#logout'
+  post 'logout' => 'sessions#logout'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
