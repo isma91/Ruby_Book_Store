@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'user/create'      => 'users#new'
   get 'books'            => 'books#index'
   get 'book/new'         => 'books#new'
+  get 'book/:id'         => 'books#edit'
   get 'customer/new'     => 'customers#new'
   get 'customers'        => 'customers#index'
   get 'customer/create'  => 'customers#new'
@@ -16,14 +17,15 @@ Rails.application.routes.draw do
   get 'order/new'        => 'orders#new'
   get 'order/create'     => 'orders#new'
 
-  post "user/login"      => "users#connexion"
+  post 'user/login'      => 'users#connexion'
   post 'user/create'     => 'users#create'
   post 'logout'          => 'sessions#logout'
   post 'book/create'     => 'books#create'
   post 'customer/create' => 'customers#create'
   post 'order/create'    => 'orders#create'
 
-  patch 'customer/:id'     => 'customers#update'
+  patch 'customer/:id'   => 'customers#update'
+  patch 'book/:id'       => 'books#update'
 
   get '*path', to: 'application#pageNotFound', via: :all
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
