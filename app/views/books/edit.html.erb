@@ -68,16 +68,20 @@
           </div>
         </div>
         <div class="row">
+          <label for="date">Year of publication</label>
+          <input type="date" name="date" id="date" class="datepicker" value="<%= @book.year %>">
+        </div>
+        <div class="row">
           <div class="input-field col s12">
             <p id="resumeError"></p>
             <textarea id="resume" name="resume" class="materialize-textarea"><%= @book.resume %></textarea>
             <label for="resume" id="labelResume">Resume of <%= @book.name %></label>
-            <span id="resumeCount">0</span>
+            <span id="resumeCount"><%= @book.resume.length %></span>
           </div>
         </div>
         <div class="row">
           <div class="endButton">
-            <button class="waves-effect btn-flat">Add the book</button>
+            <button class="waves-effect btn-flat">Edit the book</button>
           </div>
         </div>
     <% end %>
