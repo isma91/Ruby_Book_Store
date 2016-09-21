@@ -5,6 +5,9 @@ class Customer < ApplicationRecord
   validates :firstname, presence: {
       message: "Firstname can't be empty !!"
   }
+  validates :email, presence: {
+      message: "Email can't be empty !!"
+  }
   validates :email, uniqueness: {
       message: "Email already taken !!"
   }
