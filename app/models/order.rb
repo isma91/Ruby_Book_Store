@@ -2,10 +2,10 @@ class Order < ApplicationRecord
   validates :kind, presence: {
       message: "Type can't be empty !!"
   }
-  validates :idCustomer, presence: {
+  validates :customer_id, presence: {
       message: "Customer can't be empty !!"
   }
-  validates :idBook, presence: {
+  validates :book_id, presence: {
       message: "Book can't be empty !!"
   }
 end
