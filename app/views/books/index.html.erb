@@ -36,7 +36,7 @@
       <p class="title">No book stored yet !!</p>
   <% else %>
       <div class="row">
-        <%= @books.each do |book| %>
+        <% @books.each do |book| %>
             <div class="card col s4">
               <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="/images/<%= book.cover %>">
