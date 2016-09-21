@@ -50,7 +50,7 @@
                 <span class="card-title grey-text text-darken-4">X</span>
                 <p><%= book.resume %></p>
                 <p>List of Kind :</p>
-                <%= book.kind.split("|").each do |kind| %>
+                <% book.kind.split("|").each do |kind| %>
                     <li><%= kind %></li>
                 <% end %>
               </div>
