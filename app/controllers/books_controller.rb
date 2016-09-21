@@ -41,6 +41,32 @@ before_action :requireLogin
   end
 
   def update
+    errorEmpty = false
+    book = Hash.new
+    book["name"] = params[:name]
+    book["author"] = params[:author]
+    book["editor"] = params[:editor]
+    book["kind"] = params[:kind]
+    book["year"] = params[:date]
+    book["resume"] = params[:resume]
+    book.each do |name, value|
+      if value.to_s == "" || value == nil
+        errorEmpty = true
+        break
+      end
+    end
+    if errorEmpty == true
+      flash[:fail] = "Some filed are empty !!"
+      redirect_to "/book/#{params[:id]}"
+    else
+      book["kind"] = params[:kind].join('|')
+      Book.find(params[:id]).update(name: book["name"], author: book["author"], editor: book["editor"], kind: book["kind"], year: book["year"], resume: book["resume"])
+      time = Time.new
+      currentTime = time.strftime("%d-%m-%Y %H:%M:%S")
+      Log.new(date: currentTime, user_id: session[:userId], action: "edit book", book_id: params[:id]).save
+      flash[:success] = "Book #{params[:name]} edited successfully !!"
+      redirect_to "/books"
+    end
   end
 
   def index
@@ -58,7 +84,7 @@ before_action :requireLogin
     book["editor"] = params[:editor]
     book["kind"] = params[:kind]
     book["cover"] = params[:cover]
-    book["date"] = params[:date]
+    book["year"] = params[:date]
     book["resume"] = params[:resume]
     book.each do |name, value|
       if value.to_s == "" || value == nil
@@ -79,7 +105,7 @@ before_action :requireLogin
       bookClass.name = book["name"]
       bookClass.author = book["author"]
       bookClass.editor = book["editor"]
-      bookClass.year = book["date"]
+      bookClass.year = book["year"]
       bookClass.kind = book["kind"].join("|")
       bookClass.cover = fileName
       bookClass.resume = book["resume"]
