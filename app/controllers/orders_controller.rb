@@ -33,6 +33,7 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = ActiveRecord::Base.connection.execute("SELECT orders.kind, customers.lastname, customers.firstname, books.name, books.author FROM orders INNER JOIN customers ON customers.id = orders.customer_id INNER JOIN books ON books.id = orders.book_id")
+    order = Order.new
+    @orders = order.allOrder
   end
 end
