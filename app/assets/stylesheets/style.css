@@ -115,10 +115,11 @@ label,
 .year span {
 	cursor: pointer;
 }
-#hidden_type,
-#hidden_kind,
-#hidden_book,
-#hidden_customer {
+#login,
+#logout,
+#book,
+#customer,
+#order {
 	display: none;
 	visibility: hidden;
 }
