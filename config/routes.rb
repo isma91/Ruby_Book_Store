@@ -24,5 +24,7 @@ Rails.application.routes.draw do
   post 'order/create'    => 'orders#create'
 
   patch 'customer/:id'     => 'customers#update'
+
+  get '*path', to: 'application#pageNotFound', via: :all
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
