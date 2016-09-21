@@ -36,19 +36,21 @@ ActiveRecord::Schema.define(version: 20160920075351) do
 
   create_table "logs", force: :cascade do |t|
     t.string   "date"
-    t.string   "userId"
+    t.string   "user_id"
     t.string   "action"
-    t.integer  "bookCustomerId"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "book_id"
+    t.integer  "customer_id"
+    t.integer  "order_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "orders", force: :cascade do |t|
     t.string   "kind"
-    t.string   "idCustomer"
-    t.integer  "idBook"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "customer_id"
+    t.integer  "book_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
