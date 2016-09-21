@@ -24,7 +24,7 @@ class CustomersController < ApplicationController
     if @customer.save
       time = Time.new
       currentTime = time.strftime("%d-%m-%Y %H:%M:%S")
-      Log.new(date: currentTime, userId: session[:userId], action: "add customer", bookCustomerId: @customer.id).save
+      Log.new(date: currentTime, user_id: session[:userId], action: "add customer", customer_id: @customer.id).save
       flash[:success] = "Customer added successfully !!"
       redirect_to "/customers"
     else
