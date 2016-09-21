@@ -35,6 +35,29 @@
   <% if @orders.length == 0 %>
       <p class="title">No order stored yet !!</p>
   <% else %>
-      <p class="title">Some order here !!</p>
+      <div class="row">
+        <table class="highlight responsive-table">
+          <thead>
+          <tr>
+            <th data-field="kind">Kind</th>
+            <th data-field="lastname">Customer Lastname</th>
+            <th data-field="firstname">Customer Firstname</th>
+            <th data-field="name">Book Name</th>
+            <th data-field="author">Book Author</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @orders.each do |order| %>
+              <tr>
+                <td><%= order["kind"] %></td>
+                <td><%= order["lastname"] %></td>
+                <td><%= order["firstname"] %></td>
+                <td><%= order["name"] %></td>
+                <td><%= order["author"] %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
   <% end %>
 </div>
