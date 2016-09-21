@@ -25,6 +25,9 @@ class CustomersController < ApplicationController
 
   def update
     Customer.find(params[:id]).update(lastname: params[:lastname], firstname: params[:firstname], adresse: params[:adresse], city: params[:city], email: params[:email])
+    time = Time.new
+    currentTime = time.strftime("%d-%m-%Y %H:%M:%S")
+    Log.new(date: currentTime, user_id: session[:userId], action: "edit customer", customer_id: params[:id]).save
     flash[:success] = "Customer #{params[:lastname]}  #{params[:firstname]} updated successfully !!"
     redirect_to "/customers"
   end
