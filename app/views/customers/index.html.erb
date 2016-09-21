@@ -44,6 +44,7 @@
             <th data-field="adresse">Adresse</th>
             <th data-field="city">City</th>
             <th data-field="email">Email</th>
+            <th data-field="edit">Edit</th>
           </tr>
           </thead>
           <tbody>
@@ -54,6 +55,7 @@
                 <td><%= customer.adresse %></td>
                 <td><%= customer.city %></td>
                 <td><%= customer.email %></td>
+                <td><a class="waves-effect btn-flat" href="customer/<%= customer.id %>">Edit</a></td>
               </tr>
           <% end %>
           </tbody>
