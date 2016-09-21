@@ -42,32 +42,32 @@
     <%= form_tag "/customer/#{params[:id]}", method: 'patch' do %>
         <div class="row">
           <div class="input-field">
+            <p>xLastname</p>
             <input type="text" name="lastname" id="lastname" value="<%= @customer.lastname %>">
-            <label for="lastname">Lastname</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field">
+            <p>Firstname</p>
             <input type="text" name="firstname" id="firstname" value="<%= @customer.firstname %>">
-            <label for="firstname">Firstname</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field">
-            <input  type="text" name="adresse" id="adresse" value="<%= @customer.adresse %>">
-            <label for="adresse">Adresse</label>
+            <p>Adresse</p>
+            <input type="text" name="adresse" id="adresse" value="<%= @customer.adresse %>">
           </div>
         </div>
         <div class="row">
           <div class="input-field">
+            <p>City</p>
             <input type="text" name="city" id="city" value="<%= @customer.city %>">
-            <label for="city">City</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field">
+            <p>Email</p>
             <input type="email" name="email" id="email" value="<%= @customer.email %>">
-            <label for="email">Email</label>
           </div>
         </div>
         <div class="row">
