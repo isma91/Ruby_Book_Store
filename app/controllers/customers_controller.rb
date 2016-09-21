@@ -19,6 +19,16 @@ class CustomersController < ApplicationController
     @customers = Customer.all
   end
 
+  def edit
+    @customer = Customer.find(params[:id])
+  end
+
+  def update
+    Customer.find(params[:id]).update(lastname: params[:lastname], firstname: params[:firstname], adresse: params[:adresse], city: params[:city], email: params[:email])
+    flash[:success] = "Customer #{params[:lastname]}  #{params[:firstname]} updated successfully !!"
+    redirect_to "/customers"
+  end
+
   def create
     @customer = Customer.new(customerParam)
     if @customer.save
