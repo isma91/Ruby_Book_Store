@@ -12,6 +12,37 @@ before_action :requireLogin
     end
   end
 
+  def edit
+    @kindHash = Hash.new
+    @kindHash["action"] = "Action"
+    @kindHash["adventure"] = "Adventure"
+    @kindHash["detective"] = "Detective"
+    @kindHash["drama"] = "Drama"
+    @kindHash["erotic"] = "Erotic"
+    @kindHash["fantasy"] = "Fantasy"
+    @kindHash["horror"] = "Horror"
+    @kindHash["humour"] = "Humour"
+    @kindHash["josei"] = "Josei (For Young Women and Adult)"
+    @kindHash["kodomo"] = "Kodomo (For Young Child)"
+    @kindHash["legend"] = "Legend"
+    @kindHash["mystery"] = "Mystery"
+    @kindHash["mythology"] = "Mythology"
+    @kindHash["redisu"] = "Redisu (For Adult Woman)"
+    @kindHash["romance"] = "Romance"
+    @kindHash["science fiction"] = "Science fiction"
+    @kindHash["seinen"] = "Seinen (For Young Man and Adult)"
+    @kindHash["seijin"] = "Seijin (For Adult Man)"
+    @kindHash["shojo"] = "Shojo (For Teenage Girl)"
+    @kindHash["shonen"] = "Shonen (For Teen Boy)"
+    @kindHash["suspence"] = "Suspence"
+    @kindHash["thriller"] = "Thriller"
+    @kindHash["western"] = "Western"
+    @book = Book.find(params[:id])
+  end
+
+  def update
+  end
+
   def index
     user = User.find(session[:userId])
     @userLastname = user.lastname
@@ -25,7 +56,6 @@ before_action :requireLogin
     book["name"] = params[:name]
     book["author"] = params[:author]
     book["editor"] = params[:editor]
-    book["type"] = params[:type]
     book["kind"] = params[:kind]
     book["cover"] = params[:cover]
     book["date"] = params[:date]
