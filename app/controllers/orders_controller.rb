@@ -19,12 +19,12 @@ class OrdersController < ApplicationController
     @customers = Customer.all
     @order = Order.new
     @order.kind = params[:kind]
-    @order.idBook = params[:book]
-    @order.idCustomer = params[:customer]
+    @order.book_id = params[:book]
+    @order.customer_id = params[:customer]
     if @order.save
       time = Time.new
       currentTime = time.strftime("%d-%m-%Y %H:%M:%S")
-      Log.new(date: currentTime, userId: session[:userId], action: "add order", bookCustomerId: @order.id).save
+      Log.new(date: currentTime, user_id: session[:userId], action: "add order", order_id: @order.id).save
       flash[:success] = "Order added successfully !!"
       redirect_to "/orders"
     else
@@ -33,6 +33,6 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all
+    @orders = ActiveRecord::Base.connection.execute("SELECT orders.kind, customers.lastname, customers.firstname, books.name, books.author FROM orders INNER JOIN customers ON customers.id = orders.customer_id INNER JOIN books ON books.id = orders.book_id")
   end
 end

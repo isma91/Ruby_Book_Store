@@ -41,7 +41,7 @@ class UsersController < ApplicationController
           time = Time.new
           currentTime = time.strftime("%d-%m-%Y %H:%M:%S")
           session[:userId] = userToCheck["id"]
-          Log.new(date: currentTime, userId: userToCheck["id"], action: "login", bookCustomerId: nil).save
+          Log.new(date: currentTime, user_id: userToCheck["id"], action: "login").save
           redirect_to "/books"
         else
           flash[:fail] = "Bad email or password !!"
