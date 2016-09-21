@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row">
+    <h1 class="title">You can add here a new book !!</h1>
+  </div>
+  <div class="row" id="event">
+    <% flash.each do |typeAlert, message| %>
+        <div class="alert alert-<%= typeAlert %>"><%= message %></div>
+    <% end %>
+  </div>
+  <div class="row" id="allButton">
+    <div class="row">
+      <%= form_tag "/logout", method: "post" do %>
+          <%= csrf_meta_tags %>
+          <div class="endButton">
+            <button class="waves-effect btn-flat">Logout</button>
+          </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/books">All Books</a>
+        <a class="waves-effect btn-flat" href="/orders">All Orders</a>
+        <a class="waves-effect btn-flat" href="/customers">All Customers</a>
+        <a class="waves-effect btn-flat" href="/logs">All Logs</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/order/new">Add Order</a>
+        <a class="waves-effect btn-flat" href="/customer/new">Add Customer</a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <%= form_tag "/book/#{params[:id]}", method: 'patch' do %>
+        <div class="row">
+          <div class="input-field">
+            <p>Name</p>
+            <input type="text" name="name" id="name" value="<%= @book.name %>">
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <p>Author</p>
+            <input type="text" name="author" id="author" value="<%= @book.author %>">
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <p>Editor</p>
+            <input type="text" name="editor" id="editor" value="<%= @book.editor %>">
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <select multiple="true" name="kind[]" id="selectKind">
+              <%= @kindHash.each do |kind, description| %>
+                  <%= @book.kind.split('|').each do |bookKind| %>
+                      <% if bookKind == kind %>
+                          <option value="<%= kind %>" selected><%= description %></option>
+                      <% else %>
+                          <option value="<%= kind %>"><%= description %></option>
+                      <% end %>
+                  <% end %>
+              <% end %>
+            </select>
+            <label for="kind" id="labelKind">Kind Of Novel</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <p id="resumeError"></p>
+            <textarea id="resume" name="resume" class="materialize-textarea"><%= @book.resume %></textarea>
+            <label for="resume" id="labelResume">Resume of <%= @book.name %></label>
+            <span id="resumeCount">0</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="endButton">
+            <button class="waves-effect btn-flat">Add the book</button>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
