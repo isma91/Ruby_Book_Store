@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="row">
+    <h1 class="title">You can add here a new customer !!</h1>
+  </div>
+  <div class="row" id="event">
+    <% flash.each do |typeAlert, message| %>
+        <div class="alert alert-<%= typeAlert %>"><%= message %></div>
+    <% end %>
+  </div>
+  <div class="row" id="allButton">
+    <div class="row">
+      <%= form_tag "/logout", method: "post" do %>
+          <%= csrf_meta_tags %>
+          <div class="endButton">
+            <button class="waves-effect btn-flat">Logout</button>
+          </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/books">All Books</a>
+        <a class="waves-effect btn-flat" href="/orders">All Orders</a>
+        <a class="waves-effect btn-flat" href="/customers">All Customers</a>
+        <a class="waves-effect btn-flat" href="/logs">All Logs</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/order/new">Add Order</a>
+        <a class="waves-effect btn-flat" href="/book/new">Add Book</a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <% if @customer.errors.any? %>
+        <% for message_error in @customer.errors.full_messages %>
+            <div class="alert-fail"><%= message_error %></div>
+        <% end %>
+    <% end %>
+  </div>
+  <div class="row">
+    <%= form_tag "/customer/#{params[:id]}", method: 'patch' do %>
+        <div class="row">
+          <div class="input-field">
+            <input type="text" name="lastname" id="lastname" value="<%= @customer.lastname %>">
+            <label for="lastname">Lastname</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <input type="text" name="firstname" id="firstname" value="<%= @customer.firstname %>">
+            <label for="firstname">Firstname</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <input  type="text" name="adresse" id="adresse" value="<%= @customer.adresse %>">
+            <label for="adresse">Adresse</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <input type="text" name="city" id="city" value="<%= @customer.city %>">
+            <label for="city">City</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <input type="email" name="email" id="email" value="<%= @customer.email %>">
+            <label for="email">Email</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="endButton">
+            <button class="waves-effect btn-flat">Update The Customer</button>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
