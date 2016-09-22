@@ -48,6 +48,9 @@ class OrdersController < ApplicationController
   end
 
   def index
+    user = User.find(session[:userId])
+    @userLastname = user.lastname
+    @userFirstname = user.firstname
     order = Order.new
     @orders = order.allOrder
   end
