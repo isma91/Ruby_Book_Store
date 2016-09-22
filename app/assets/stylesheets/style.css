@@ -91,7 +91,8 @@ label,
 .picker__day--selected:hover,
 .picker--focused .picker__day--selected,
 .switch label input[type=checkbox]:checked+.lever:after,
-.switch label input[type=checkbox]:checked+.lever {
+.switch label input[type=checkbox]:checked+.lever,
+.tabs .indicator {
 	background-color: #000000;
 }
 #toast-container {
@@ -100,7 +101,8 @@ label,
 .dropdown-button,
 .all_kind,
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating),
-.card .card-action a:not(.btn):not(.btn-large):not(.btn-floating):hover {
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-floating):hover,
+.tabs .tab a {
 	background-color: #FFFFFF;
 	color: #000000;
 }
@@ -117,11 +119,6 @@ label,
 .year span {
 	cursor: pointer;
 }
-#login,
-#logout,
-#book,
-#customer,
-#order {
-	display: none;
-	visibility: hidden;
+.tabs .tab a:hover {
+    color: lightgrey;
 }
