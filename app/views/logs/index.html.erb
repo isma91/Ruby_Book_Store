@@ -35,11 +35,14 @@
   <div class="row">
     <div class="col s12">
       <ul class="tabs">
-        <li class="tab col s3"><a href="#login">Login</a></li>
-        <li class="tab col s3"><a href="#logout">Logout</a></li>
-        <li class="tab col s3"><a href="#customer">Customer</a></li>
-        <li class="tab col s3"><a href="#book">Book</a></li>
-        <li class="tab col s3"><a href="#order">Order</a></li>
+        <li class="tab col"><a href="#login">Login</a></li>
+        <li class="tab col"><a href="#logout">Logout</a></li>
+        <li class="tab col"><a href="#book">Book</a></li>
+        <li class="tab col"><a href="#bookEdit">Book Edited</a></li>
+        <li class="tab col"><a href="#customer">Customer</a></li>
+        <li class="tab col"><a href="#customerEdit">Customer Edited</a></li>
+        <li class="tab col"><a href="#order">Order</a></li>
+        <li class="tab col"><a href="#orderEdit">Order Edited</a></li>
       </ul>
     </div>
     <div class="row" id="login">
@@ -118,6 +121,34 @@
       </tbody>
       </table>
     </div>
+    <div class="row" id="bookEdit">
+      <% if @books.length == 0 %>
+          <p class="title">No book edited yet !!</p>
+      <% else %>
+          <table class="highlight responsive-table">
+            <thead>
+            <tr>
+              <th data-field="date">Date</th>
+              <th data-field="lastname">Lastname</th>
+              <th data-field="firstname">Firstname</th>
+              <th data-field="name">Book Name</th>
+              <th data-field="author">Book Author</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @booksEdit.each do |book| %>
+                <tr>
+                  <td><%= book["date"] %></td>
+                  <td><%= book["lastname"] %></td>
+                  <td><%= book["firstname"] %></td>
+                  <td><%= book["name"] %></td>
+                  <td><%= book["author"] %></td>
+                </tr>
+            <% end %>
+      <% end %>
+      </tbody>
+      </table>
+    </div>
     <div class="row" id="customer">
       <% if @customers.length == 0 %>
           <p class="title">No customer logs yet !!</p>
@@ -134,6 +165,34 @@
             </thead>
             <tbody>
             <% @customers.each do |customer| %>
+                <tr>
+                  <td><%= customer["date"] %></td>
+                  <td><%= customer["userLastname"] %></td>
+                  <td><%= customer["userFirstname"] %></td>
+                  <td><%= customer["customerLastname"] %></td>
+                  <td><%= customer["customerFirstname"] %></td>
+                </tr>
+            <% end %>
+      <% end %>
+      </tbody>
+      </table>
+    </div>
+    <div class="row" id="customerEdit">
+      <% if @customersEdit.length == 0 %>
+          <p class="title">No customer edited yet !!</p>
+      <% else %>
+          <table class="highlight responsive-table">
+            <thead>
+            <tr>
+              <th data-field="date">Date</th>
+              <th data-field="userLastname">Lastname</th>
+              <th data-field="userFirstname">Firstname</th>
+              <th data-field="customerLastname">Customer Lastname</th>
+              <th data-field="customerFirstname">Customer Firstname</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @customersEdit.each do |customer| %>
                 <tr>
                   <td><%= customer["date"] %></td>
                   <td><%= customer["userLastname"] %></td>
@@ -165,6 +224,40 @@
             </thead>
             <tbody>
             <% @orders.each do |order| %>
+                <tr>
+                  <td><%= order["date"] %></td>
+                  <td><%= order["userLastname"] %></td>
+                  <td><%= order["userFirstname"] %></td>
+                  <td><%= order["customerLastname"] %></td>
+                  <td><%= order["customerFirstname"] %></td>
+                  <td><%= order["name"] %></td>
+                  <td><%= order["author"] %></td>
+                  <td><%= order["kind"] %></td>
+                </tr>
+            <% end %>
+      <% end %>
+      </tbody>
+      </table>
+    </div>
+    <div class="row" id="orderEdit">
+      <% if @orders.length == 0 %>
+          <p class="title">No order edited yet !!</p>
+      <% else %>
+          <table class="highlight responsive-table">
+            <thead>
+            <tr>
+              <th data-field="date">Date</th>
+              <th data-field="userLastname">Lastname</th>
+              <th data-field="userFirstname">Firstname</th>
+              <th data-field="customerLastname">Customer Lastname</th>
+              <th data-field="customerFirstname">Customer Firstname</th>
+              <th data-field="name">Book Name</th>
+              <th data-field="author">Book Author</th>
+              <th data-field="kind">Kind</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @ordersEdit.each do |order| %>
                 <tr>
                   <td><%= order["date"] %></td>
                   <td><%= order["userLastname"] %></td>
