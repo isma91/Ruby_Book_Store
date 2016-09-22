@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <h1 class="title">Welcome back <%= @userLastname %>  <%= @userFirstname %>!!</h1>
+    <h1 class="title">Here is all your users list !!</h1>
+  </div>
+  <div class="row" id="event">
+    <% flash.each do |typeAlert, message| %>
+        <div class="alert alert-<%= typeAlert %>"><%= message %></div>
+    <% end %>
+  </div>
+  <div class="row" id="allButton">
+    <div class="row">
+      <%= form_tag "/logout", method: "post" do %>
+          <%= csrf_meta_tags %>
+          <div class="endButton">
+            <button class="waves-effect btn-flat">Logout</button>
+          </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/orders">All Orders</a>
+        <a class="waves-effect btn-flat" href="/books">All Books</a>
+        <a class="waves-effect btn-flat" href="/logs">All Logs</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/book/new">Add Book</a>
+        <a class="waves-effect btn-flat" href="/order/new">Add Order</a>
+        <a class="waves-effect btn-flat" href="/customer/new">Add Customer</a>
+      </div>
+    </div>
+  </div>
+  <% if @users.length == 0 %>
+      <p class="title">No users stored yet !!</p>
+  <% else %>
+      <div class="row">
+        <table class="highlight responsive-table">
+          <thead>
+          <tr>
+            <th data-field="lastname">Lastname</th>
+            <th data-field="firstname">Firstname</th>
+            <th data-field="email">email</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @users.each do |user| %>
+              <tr>
+                <td><%= user.lastname %></td>
+                <td><%= user.firstname %></td>
+                <td><%= user.email %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+  <% end %>
+</div>
