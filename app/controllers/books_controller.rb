@@ -49,6 +49,9 @@ before_action :requireLogin
     book["kind"] = params[:kind]
     book["year"] = params[:date]
     book["resume"] = params[:resume]
+    if params[:editCoverSwitch] == "on"
+      book["cover"] = params[:cover]
+    end
     book.each do |name, value|
       if value.to_s == "" || value == nil
         errorEmpty = true
@@ -60,7 +63,16 @@ before_action :requireLogin
       redirect_to "/book/#{params[:id]}"
     else
       book["kind"] = params[:kind].join('|')
-      Book.find(params[:id]).update(name: book["name"], author: book["author"], editor: book["editor"], kind: book["kind"], year: book["year"], resume: book["resume"])
+      if params[:editCoverSwitch] == "on"
+        uploaded_io = params[:cover]
+        fileName = rand(1...99999).to_s + uploaded_io.original_filename
+        File.open(Rails.root.join('public', 'images', fileName), 'wb') do |file|
+          file.write(uploaded_io.read)
+        end
+        Book.find(params[:id]).update(name: book["name"], author: book["author"], editor: book["editor"], kind: book["kind"], cover: fileName, year: book["year"], resume: book["resume"])
+      else
+        Book.find(params[:id]).update(name: book["name"], author: book["author"], editor: book["editor"], kind: book["kind"], year: book["year"], resume: book["resume"])
+      end
       time = Time.new
       currentTime = time.strftime("%d-%m-%Y %H:%M:%S")
       Log.new(date: currentTime, user_id: session[:userId], action: "edit book", book_id: params[:id]).save
