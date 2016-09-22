@@ -14,6 +14,21 @@ class OrdersController < ApplicationController
     @customers = Customer.all
   end
 
+  def edit
+    @order = Order.find(params[:id])
+    @books = Book.all
+    @customers = Customer.all
+  end
+
+  def update
+    Order.find(params[:id]).update(kind: params[:kind], customer_id: params[:customer], book_id: params[:book])
+    time = Time.new
+    currentTime = time.strftime("%d-%m-%Y %H:%M:%S")
+    Log.new(date: currentTime, user_id: session[:userId], action: "edit order", order_id: params[:id]).save
+    flash[:success] = "Order updated successfully !!"
+    redirect_to "/orders"
+  end
+
   def create
     @books = Book.all
     @customers = Customer.all
