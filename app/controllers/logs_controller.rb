@@ -14,8 +14,11 @@ class LogsController < ApplicationController
     @logins = log.logLogin
     @logouts = log.logLogout
     @books = log.logBook
+    @booksEdit = log.logBookEdit
     @customers = log.logCustomer
+    @customersEdit = log.logCustomerEdit
     @orders = log.logOrder
+    @ordersEdit = log.logOrderEdit
     @userLastname = user.lastname
     @userFirstname = user.firstname
   end
