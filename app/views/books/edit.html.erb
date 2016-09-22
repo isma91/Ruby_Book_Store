@@ -32,7 +32,7 @@
     </div>
   </div>
   <div class="row">
-    <%= form_tag "/book/#{params[:id]}", method: 'patch' do %>
+    <%= form_tag({url: "/book/#{params[:id]}"}, multipart: true, method: 'patch') do %>
         <div class="row">
           <div class="input-field">
             <p>Name</p>
@@ -66,6 +66,22 @@
             </select>
             <label for="kind" id="labelKind">Kind Of Novel</label>
           </div>
+        </div>
+        <div class="row">
+          <label>Add new cover ?</label>
+          <div class="switch">
+            <label>
+              Off
+              <input type="checkbox" id="editCoverSwitch" name="editCoverSwitch">
+              <span class="lever"></span>
+              On
+            </label>
+          </div>
+          <div id="editCover"></div>
+        </div>
+        <div class="row">
+          <label>Current Cover</label>
+          <img class="materialboxed" src="/images/<%= @book.cover %>">
         </div>
         <div class="row">
           <label for="date">Year of publication</label>
