@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row">
+    <h1 class="title">You can edit your order here !!</h1>
+  </div>
+  <div class="row" id="event">
+    <% flash.each do |typeAlert, message| %>
+        <div class="alert alert-<%= typeAlert %>"><%= message %></div>
+    <% end %>
+  </div>
+  <div class="row" id="allButton">
+    <div class="row">
+      <%= form_tag "/logout", method: "post" do %>
+          <%= csrf_meta_tags %>
+          <div class="endButton">
+            <button class="waves-effect btn-flat">Logout</button>
+          </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/books">All Books</a>
+        <a class="waves-effect btn-flat" href="/orders">All Orders</a>
+        <a class="waves-effect btn-flat" href="/customers">All Customers</a>
+        <a class="waves-effect btn-flat" href="/logs">All Logs</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="endButton">
+        <a class="waves-effect btn-flat" href="/customer/new">Add Customer</a>
+        <a class="waves-effect btn-flat" href="/book/new">Add Book</a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <%= form_tag "/order/#{params[:id]}", method: 'patch' do %>
+        <div class="row">
+          <div class="input-field">
+            <select id="kind" name="kind">
+              <% if @order.kind == "rent" %>
+                  <option value="rent" selected>Rent</option>
+                  <option value="purchase">Purchase</option>
+              <% else %>
+                  <option value="rent">Rent</option>
+                  <option value="purchase" selected>Purchase</option>
+              <% end %>
+            </select>
+            <label for="kind">Kind</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <select id="book" name="book">
+              <% @books.each do |book| %>
+                  <% if book.id.to_i == @order.book_id.to_i %>
+                      <option value="<%= book.id %>" data-icon="/images/<%= book.cover %>" selected><%= book.name %></option>
+                  <% else %>
+                      <option value="<%= book.id %>" data-icon="/images/<%= book.cover %>"><%= book.name %></option>
+                  <% end %>
+              <% end %>
+            </select>
+            <label for="book">Book</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <select id="customer" name="customer">
+              <% @customers.each do |customer| %>
+                  <% if customer.id.to_i == @order.customer_id.to_i %>
+                      <option value="<%= customer.id %>" selected><%= customer.lastname %> <%= customer.firstname %></option>
+                  <% else %>
+                      <option value="<%= customer.id %>"><%= customer.lastname %> <%= customer.firstname %></option>
+                  <% end %>
+              <% end %>
+            </select>
+            <label for="customer">Customer</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="endButton">
+            <button class="waves-effect btn-flat">Edit the Order</button>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
