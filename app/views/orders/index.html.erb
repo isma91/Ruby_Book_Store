@@ -44,6 +44,7 @@
             <th data-field="firstname">Customer Firstname</th>
             <th data-field="name">Book Name</th>
             <th data-field="author">Book Author</th>
+            <th data-field="edit">Edit</th>
           </tr>
           </thead>
           <tbody>
@@ -54,6 +55,7 @@
                 <td><%= order["firstname"] %></td>
                 <td><%= order["name"] %></td>
                 <td><%= order["author"] %></td>
+                <td><a class="waves-effect btn-flat" href="order/<%= order["id"] %>">Edit</a></td>
               </tr>
           <% end %>
           </tbody>
